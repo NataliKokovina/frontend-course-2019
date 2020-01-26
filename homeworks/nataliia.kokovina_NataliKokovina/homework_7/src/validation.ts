@@ -6,31 +6,32 @@ import {
 } from './regex';
 
 interface InputString {
-    value?: string
+    value?: string;
 }
 
 interface Form {
-    firstName: HTMLInputElement,
-    lastName: HTMLInputElement,
-    email: HTMLInputElement,
-    phone: HTMLInputElement,
-    age: HTMLInputElement,
+    firstName: HTMLInputElement;
+    lastName: HTMLInputElement;
+    email: HTMLInputElement;
+    phone: HTMLInputElement;
+    age: HTMLInputElement;
 }
 
-function isValidName(name: InputString, min: number, max: number) {
+function isValidName(name: InputString, min: number, max: number): boolean {
     return reName.test(name.value) && name.value.length >= min && name.value.length <= max;
 }
 
-function isValidAge(numberRange: InputString, min: number, max: number) {
+function isValidAge(numberRange: InputString, min: number, max: number): boolean {
     if (numberRange.value.length !== 0) {
         return reAge.test(numberRange.value)
         && Number(numberRange.value) >= min
         && Number(numberRange.value) <= max;
     }
+
     return true;
 }
 
-export function isValid(form: Form) {
+export function isValid(form: Form): boolean {
     if (!isValidName(form.firstName, 2, 20)) {
         addInvalid(form.firstName);
     } else {
